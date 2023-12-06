@@ -2,6 +2,7 @@ node_modules
 
 *.jpg
 *.png
+*.mp4
 *.jpeg
 *.pdf
 *.js

@@ -62,7 +62,7 @@ const deleteBuilding = asyncHandler(async (req: CustomRequest, res: Response) =>
     throw new Error(errorInterface(buildingUpdated?.message).ERROR_UPDATING_BUILDING);
   }
 
-  res.status(201).json(updatedBuilding);
+  res.status(201).json(buildingUpdated);
 });
 
 export default deleteBuilding;
