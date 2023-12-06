@@ -1,0 +1,12 @@
+node_modules
+
+*.jpg
+*.png
+*.jpeg
+*.pdf
+*.js
+
+
+.env
+
+notes.txt
