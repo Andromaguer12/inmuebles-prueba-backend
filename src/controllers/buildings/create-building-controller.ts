@@ -6,7 +6,7 @@ import asyncHandler from 'express-async-handler';
 import currentErrorInterface from '../errors/buildings/errors';
 import buildingRepository from '../../shared/repositories/buildingRepository';
 import { UserDocument } from '../../typesDefs/models/users/types';
-import { BUILDING_IMAGE, BUILDING_VIDEO } from '../../config/multer/fieldsNames';
+import { BUILDING_FILES } from '../../config/multer/fieldsNames';
 import path from 'path';
 import fs from 'fs';
 import { BuildingCard } from '../../typesDefs/models/buildings/buildings';
@@ -25,20 +25,13 @@ interface CustomRequest extends Request {
 // @access  Private/Admin
 const registerBuilding = asyncHandler(async (req: CustomRequest, res: Response) => {
   const { address, name, description, price, squareMeters }: Partial<BuildingCard> = req.body;
-  const buildingImages = req.files[BUILDING_IMAGE];
-  const buildingVideos = req.files[BUILDING_VIDEO];
-  const currImages = buildingImages.map((file) => ({
-    link: file.filename as string,
-    mediaType: 'image',
-    name: file.originalname as string,
-  }));
-  const videos = buildingVideos.map((file) => ({
-    link: file.filename as string,
-    mediaType: 'video',
-    name: file.originalname as string,
-  }));
+  const buildingFiles = req.files[BUILDING_FILES];
 
-  const images: any[] = currImages.concat(videos);
+  const images: any[] = buildingFiles.map((file) => ({
+    link: file.filename as string,
+    mediaType: file.mimetype.split('/')[0],
+    name: file.originalname as string,
+  }));
 
   const fileDeleter = (array: any) => {
     array.forEach((file) => {

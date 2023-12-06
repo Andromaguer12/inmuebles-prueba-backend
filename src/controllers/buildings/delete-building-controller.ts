@@ -62,13 +62,6 @@ const deleteBuilding = asyncHandler(async (req: CustomRequest, res: Response) =>
     throw new Error(errorInterface(buildingUpdated?.message).ERROR_UPDATING_BUILDING);
   }
 
-  const updatedBuilding: any = await buildingRepository.getBuildingById(id);
-
-  if (!updatedBuilding) {
-    res.status(400);
-    throw new Error(errorInterface('building-not-found').ERROR_UPDATING_BUILDING);
-  }
-
   res.status(201).json(updatedBuilding);
 });
 
