@@ -16,7 +16,7 @@ const app = express();
 // applying middlewares
 dotenv.config();
 app.use(cors());
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
