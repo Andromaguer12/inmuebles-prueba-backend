@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 // import { AllEndPoints } from './routes/endpoints.index';
-import morgan from 'morgan';
 import dotenv from 'dotenv';
 import configs from '../constants/constants-config';
 import initConnection from '../mongoose/mongoDatabase';
@@ -16,7 +15,6 @@ const app = express();
 // applying middlewares
 dotenv.config();
 app.use(cors());
-if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
